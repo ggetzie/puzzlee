@@ -1,0 +1,11 @@
+#! /usr/bin/env bash
+
+echo "About to create new database ${POSTGRES_NAME} owned by user ${POSTGRES_USER} with password ${POSTGRES_PASSWORD}"
+read -p 'Proceed? Y[N]: ' CONFIRM
+if [ "$CONFIRM" = "y" ] || [ "$CONFIRM" = "Y" ]
+then
+    psql postgres -c "CREATE ROLE ${POSTGRES_USER} WITH LOGIN PASSWORD '${POSTGRES_PASSWORD}';"
+    psql postgres -c "CREATE DATABASE ${POSTGRES_NAME} OWNER ${POSTGRES_USER};"
+else
+    echo "Never mind then."
+fi

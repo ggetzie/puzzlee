@@ -1,0 +1,6 @@
+#! /bin/sh
+# USAGE: source export_dotenv
+export $(cat .env | xargs)
+
+
+

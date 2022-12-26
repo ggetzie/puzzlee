@@ -1,0 +1,6 @@
+#! /usr/bin/env bash
+
+# create the webapps group if it doesn't exist
+[ $(getent group webapps) ] || sudo groupadd webapps
+
+sudo useradd --system --gid webapps --shell /bin/bash  puzzlee_user
