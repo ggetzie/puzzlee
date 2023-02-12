@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Artworks</h1>
+<p>
+  <a href="{% url 'game:artwork_create' %}" class="btn btn-primary">Add Artwork</a>
+</p>
+<ul class="list-group">
+  {% for artwork in object_list %}
+  <li class="list-group-item">
+    <a href="{{ artwork.get_absolute_url }}">{{ artwork.title }}</a>
+  </li>
+  {% empty %}
+  <li class="list-group-item">
+    No artworks yet
+  </li>
+  {% endfor %}
+</ul>
+{% endblock content%}

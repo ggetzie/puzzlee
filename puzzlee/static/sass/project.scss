@@ -37,3 +37,28 @@ $red: #b94a48;
   border-color: $dark-pink;
   color: $red;
 }
+
+.center-narrow {
+  max-width: 600px;
+  margin: auto;
+}
+
+footer {
+  height: 40px;
+  line-height: 40px;
+  font-size: 0.8em;
+}
+
+footer a {
+  color: #9f9f9f;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+main {
+  min-height: calc(100vh - 96px);
+}
