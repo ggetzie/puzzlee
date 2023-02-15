@@ -55,10 +55,14 @@ footer a {
 }
 
 footer a:hover {
-  color: blue;
+  color: #1200aa;
   text-decoration: underline;
 }
 
 main {
   min-height: calc(100vh - 96px);
+}
+
+.number-input {
+  width: 6em;
 }
