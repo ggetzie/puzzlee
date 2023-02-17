@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ object.title }}
+{% endblock title %}
+
+{% block content %}
+<h1>{{ object.fullname }}</h1>
+<h2>Artworks</h2>
+<ul class="list-group">
+{% for artwork in object.artwork_set.all %}
+<li class="list-group-item">
+  <a href="{artwork.get_absolute_url}">{{ artwork.title }}</a>
+</li>
+{% empty %}
+<li class="list-group-item">
+  No artworks by this artist yet.
+</li>
+{% endfor %}
+</ul>
+
+{% endblock content %}

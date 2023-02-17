@@ -50,3 +50,6 @@ class Artist(models.Model):
     answer = models.CharField("Answer", max_length=150)
     added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     created_at = models.DateTimeField("Created at", default=timezone.now)
+
+    def get_absolute_url(self):
+        return reverse("game:artist_detail", kwargs={"pk": self.pk})

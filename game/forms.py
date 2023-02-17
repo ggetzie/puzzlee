@@ -6,9 +6,10 @@ from game.models import Artwork, Artist
 
 
 class CreateArtworkForm(forms.ModelForm):
-    artist_fullname = forms.CharField(max_length=150)
+    artist_fullname = forms.CharField(max_length=150, label="Artist Full Name")
     artist_answer = forms.CharField(
         max_length=150,
+        label="Artist Answer",
         help_text="The portion of the artist's name to use as the answer to the puzzle",
     )
 

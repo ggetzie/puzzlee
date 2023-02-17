@@ -2,18 +2,18 @@
 
 {% block content %}
 <div class="center-narrow">
-  <h1>Artworks</h1>
+  <h1>Artists</h1>
   <p>
-    <a href="{% url 'game:artwork_create' %}" class="btn btn-primary">Add Artwork</a>
+    <a href="{% url 'game:artist_create' %}" class="btn btn-primary">Add Artist</a>
   </p>
   <ul class="list-group">
-    {% for artwork in object_list %}
+    {% for artist in object_list %}
     <li class="list-group-item">
-      <a href="{{ artwork.get_absolute_url }}">{{ artwork.title }}</a>
+      <a href="{{ artist.get_absolute_url }}">{{ artist.fullname }}</a>
     </li>
     {% empty %}
     <li class="list-group-item">
-      No artworks yet
+      No artists yet
     </li>
     {% endfor %}
   </ul>

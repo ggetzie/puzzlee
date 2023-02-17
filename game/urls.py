@@ -9,4 +9,13 @@ artwork_urls = [
     path("<int:pk>/", view=views.ArtworkDetail.as_view(), name="artwork_detail"),
 ]
 
-urlpatterns = [path("artwork/", include(artwork_urls))]
+artist_urls = [
+    path("", view=views.ArtistList.as_view(), name="artist_list"),
+    path("add/", view=views.ArtistCreate.as_view(), name="artist_create"),
+    path("<int:pk>/", view=views.ArtistDetail.as_view(), name="artist_detail"),
+]
+
+urlpatterns = [
+    path("artwork/", include(artwork_urls)),
+    path("artist/", include(artist_urls)),
+]
