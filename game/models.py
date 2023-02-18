@@ -33,7 +33,7 @@ class Artwork(models.Model):
     featured = models.DateField(
         "Next featured date", unique=True, default=get_next_featured
     )
-    year = models.PositiveSmallIntegerField("Year")
+    year = models.CharField(max_length=50)
     description = models.TextField(default="", blank=True)
     added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     created_at = models.DateTimeField("Created at", default=timezone.now)

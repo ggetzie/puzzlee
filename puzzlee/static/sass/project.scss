@@ -1,9 +1,6 @@
 @import "custom_bootstrap_vars";
 @import "bootstrap";
 
-.skinny {
-  max-width: 640px;
-}
 // project specific CSS goes here
 
 ////////////////////////////////
@@ -39,7 +36,7 @@ $red: #b94a48;
 }
 
 .center-narrow {
-  max-width: 600px;
+  max-width: 40em;
   margin: auto;
 }
 

@@ -29,7 +29,7 @@ class CreateArtworkForm(forms.ModelForm):
                 "title",
                 "artist_fullname",
                 "artist_answer",
-                Field("year", css_class="number-input"),
+                "year",
                 "image",
                 "description",
                 "added_by",
