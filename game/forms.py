@@ -24,6 +24,7 @@ class CreateArtworkForm(forms.ModelForm):
         self.helper.form_method = "post"
         self.helper.form_action = "game:artwork_create"
         self.helper.form_class = "pz-form"
+        self.helper.attrs = {"autocomplete": "off"}
         self.helper.add_layout(
             Layout(
                 "title",

@@ -17,6 +17,11 @@ class ArtworkCreate(UserIsStaffMixin, CreateView):
         res["added_by"] = self.request.user
         return res
 
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["artist_list"] = list(Artist.objects.values_list("fullname", "answer"))
+        return context
+
 
 class ArtworkDetail(UserIsStaffMixin, DetailView):
     model = Artwork

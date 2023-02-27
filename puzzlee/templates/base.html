@@ -29,14 +29,17 @@
       <script defer src="{% static 'js/vendors.min.js' %}"></script>
 
       <!-- place project specific Javascript in this file -->
-      <script defer src="{% static 'js/project.min.js' %}"></script>
+      {% if debug %}
+        <script defer src="{% static 'js/project.js' %}"></script>
+      {% else %}
+        <script defer src="{% static 'js/project.min.js' %}"></script>
+      {% endif %}
 
     {% endblock javascript %}
 
   </head>
 
   <body>
-
     <div class="mb-1">
       <nav class="navbar navbar-expand-md navbar-light bg-light">
         <div class="container-fluid">

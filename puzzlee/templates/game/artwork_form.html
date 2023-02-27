@@ -12,3 +12,7 @@
   {% crispy form %}
 </div>
 {% endblock content%}
+
+{% block inline_javascript %}
+{{ artist_list|json_script:"artist_list" }}
+{% endblock inline_javascript %}
