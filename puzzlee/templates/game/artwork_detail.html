@@ -5,5 +5,13 @@
 {% endblock title %}
 
 {% block content %}
-<h1>{{ object.title }}</h1>
+<div class="center-narrow">
+  <h1>{{ object.title }}</h1>
+  
+  <img src="{{ object.image.url }}" class="img-fluid m-auto" />
+  <p>by {{ object.artist.fullname }} {{ object.year }}</p>
+  <p>
+    {{ object.description}}
+  </p>
+</div>
 {% endblock content %}

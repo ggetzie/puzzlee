@@ -41,6 +41,27 @@ class CreateArtworkForm(forms.ModelForm):
             )
         )
 
+    def save(self):
+        user = self.cleaned_data["added_by"]
+        artist, _ = Artist.objects.get_or_create(
+            answer=self.cleaned_data["artist_answer"],
+            defaults={
+                "fullname": self.cleaned_data["artist_fullname"],
+                "added_by": user,
+            },
+        )
+        artwork = Artwork(
+            title=self.cleaned_data["title"],
+            artist=artist,
+            image=self.cleaned_data["image"],
+            year=self.cleaned_data["year"],
+            description=self.cleaned_data["description"],
+            added_by=user,
+        )
+        artwork.save()
+        print(artwork)
+        return artwork
+
 
 class CreateArtistForm(forms.ModelForm):
     class Meta:
