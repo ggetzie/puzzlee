@@ -1,3 +1,11 @@
 {
-  "cSpell.ignoreWords": ["elmnt", "fullname", "maxsplit", "puzzlee"]
+  "cSpell.ignoreWords": [
+    "dtype",
+    "dtypes",
+    "elmnt",
+    "fullname",
+    "maxsplit",
+    "openaccess",
+    "puzzlee"
+  ]
 }
