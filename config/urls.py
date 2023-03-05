@@ -11,6 +11,7 @@ urlpatterns = [
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),
     path("game/", include("game.urls", namespace="game")),
+    path("collect/", include("collect.urls", namespace="collect")),
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management

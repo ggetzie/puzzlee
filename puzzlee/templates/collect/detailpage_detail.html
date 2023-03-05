@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="center-narrow">
+  <h1>{{ object.title }}</h1>
+  <p>{{ object.attribution }}</p>
+  <p><a href="{{ object.url}}">source</a></p>
+  <p>Parent: <a href="{{ object.parent.get_absolute_url }}">{{ object.parent }}</a></p>
+</div>
+{% endblock content %}

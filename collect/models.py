@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class ListPage(models.Model):
@@ -9,8 +10,14 @@ class ListPage(models.Model):
     response_code = models.PositiveSmallIntegerField(blank=True, null=True)
     institution = models.CharField(max_length=20, default="")
 
+    class Meta:
+        ordering = ("institution", "url")
+
     def __str__(self):
         return self.title if len(self.title) > 0 else self.url
+
+    def get_absolute_url(self):
+        return reverse("collect:listpage_detail", kwargs={"pk": self.pk})
 
 
 class DetailPage(models.Model):
@@ -24,3 +31,6 @@ class DetailPage(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("collect:detailpage_detail", kwargs={"pk": self.pk})

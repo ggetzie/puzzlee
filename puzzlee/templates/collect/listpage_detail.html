@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ object.title }}</h1>
+<p>
+  <a href="{{ objec.url }}">source</a>
+</p>
+<ul class="list-group">
+  {% for detailpage in object.detailpage_set.all %}
+    <li class="list-group-item">
+      <a href="{{ detailpage.get_absolute_url }}">
+        {{ detailpage.title }}
+      </a>
+    </li>
+  {% empty %}
+    <li class="list-group-item">No detail pages for this list yet</li>
+  {% endfor %}
+</ul>
+{% endblock content %}
