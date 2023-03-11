@@ -2,6 +2,10 @@
 
 {% block content %}
 <h1>List Pages</h1>
+<h2>Filtered</h2>
+<p>
+  <a href="{% url 'collect:detail_filtered' 'met' %}">Met</a>
+</p>
 <ul class="list-group">
   {% for lp in object_list %}
   <li class="list-group-item">

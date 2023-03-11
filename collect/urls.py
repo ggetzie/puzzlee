@@ -9,7 +9,12 @@ listpage_urls = [
 ]
 
 detailpage_urls = [
-    path("<int:pk>", view=views.DetailPageDetail.as_view(), name="detailpage_detail")
+    path("<int:pk>", view=views.DetailPageDetail.as_view(), name="detailpage_detail"),
+    path(
+        "filtered/<str:institution>",
+        view=views.FilteredDetail.as_view(),
+        name="detail_filtered",
+    ),
 ]
 
 

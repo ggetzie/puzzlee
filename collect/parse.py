@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 
-from collect.models import ListPage, DetailPage
+from collect.models import ListPage, DetailPage, AttributionToken
 
 
 def met_parse_list():
@@ -21,3 +21,11 @@ def met_parse_list():
                 )
             )
     DetailPage.objects.bulk_create(details)
+
+
+def met_tokenize_attributes():
+    for page in DetailPage.objects.filter(parent__institution="met"):
+        tokens = [t.strip() for t in page.attribution.split(",")]
+        for token_str in tokens:
+            token, _ = AttributionToken.objects.get_or_create(value=token_str)
+            page.tokens.add(token)

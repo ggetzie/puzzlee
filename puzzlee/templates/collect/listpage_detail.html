@@ -4,15 +4,24 @@
 <p>
   <a href="{{ objec.url }}">source</a>
 </p>
+
 <ul class="list-group">
   {% for detailpage in object.detailpage_set.all %}
     <li class="list-group-item">
-      <a href="{{ detailpage.get_absolute_url }}">
-        {{ detailpage.title }}
-      </a>
+      <div class="row">
+        <div class="col">
+          <a href="{{ detailpage.get_absolute_url }}">
+            {{ detailpage.title }}
+          </a>
+        </div>
+        <div class="col">{{ detailpage.attribution }}</div>
+      </div>
     </li>
   {% empty %}
-    <li class="list-group-item">No detail pages for this list yet</li>
+    <li class="list-group-item">
+      <div class="row"><div class="col">No detail pages for this list yet</div></div>
+    </li>
   {% endfor %}
-</ul>
+  </ul>
+
 {% endblock content %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Filtered detail pages for {{ institution }}</h1>
+
+<ul class="list-group">
+  {% for detailpage in object_list %}
+  <li class="list-group-item">
+    <a href="{{ detailpage.get_absolute_url }}">{{ detailpage.title }}</a> - {{ detailpage.attribution}}
+  </li>
+  {% empty %}
+  <li class="list-group-item">
+    No detail pages for this institution
+  </li>
+  {% endfor %}
+</ul>
+
+{% include "pagination.html" %}
+{% endblock content %}

@@ -28,9 +28,25 @@ class DetailPage(models.Model):
     parent = models.ForeignKey(ListPage, on_delete=models.SET_NULL, null=True)
     last_visited = models.DateTimeField(blank=True, null=True)
     response_code = models.PositiveSmallIntegerField(blank=True, null=True)
+    tokens = models.ManyToManyField("AttributionToken")
+    is_candidate = models.BooleanField(default=False)
+    reviewed = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse("collect:detailpage_detail", kwargs={"pk": self.pk})
+
+
+class AttributionToken(models.Model):
+    value = models.CharField(max_length=200)
+
+    class Meta:
+        ordering = ("value",)
+
+    def __str__(self):
+        return self.value[:100]
+
+    def get_absolute_url(self):
+        return reverse("collect:attributetoken_detail", kwargs={"pk": self.pk})
