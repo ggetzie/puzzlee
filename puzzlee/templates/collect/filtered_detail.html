@@ -3,17 +3,42 @@
 {% block content %}
 <h1>Filtered detail pages for {{ institution }}</h1>
 
-<ul class="list-group">
-  {% for detailpage in object_list %}
-  <li class="list-group-item">
-    <a href="{{ detailpage.get_absolute_url }}">{{ detailpage.title }}</a> - {{ detailpage.attribution}}
-  </li>
-  {% empty %}
-  <li class="list-group-item">
-    No detail pages for this institution
-  </li>
-  {% endfor %}
-</ul>
+<table class="table">
+  <thead class="position-sticky top-0 bg-black text-white">
+    <tr>
+      <th scope="col">Accept</th>
+      <th scope="col">Reviewed</th>
+      <th scope="col">Title</th>
+      <th scope="col">Attribution</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for detailpage in object_list %}
+    <tr>
+      <td class="text-center">
+        <input id="accept_dp-{{ detailpage.pk }}" class="form-check-input" 
+              type="checkbox" value="{{ detailpage.pk }}" />
+      </td>
+      <td class="text-center">
+        <input id="reviewed_dp-{{ detailpage.pk }}" class="form-check-input" 
+              type="checkbox" value="{{ detailpage.pk }}" />
+      </td>
+      <td>
+        <a href="{{ detailpage.get_absolute_url }}">
+          {{ detailpage.title }}
+        </a>
+      </td>
+      <td>
+        {{ detailpage.attribution }}
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td></td><td></td><td>No detail pages here</td><td></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
 {% include "pagination.html" %}
 {% endblock content %}
