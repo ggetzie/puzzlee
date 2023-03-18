@@ -3,28 +3,28 @@
 {% block content %}
 <h1>Filtered detail pages for {{ institution }}</h1>
 
+
 <table class="table">
   <thead class="position-sticky top-0 bg-black text-white">
     <tr>
-      <th scope="col">Accept</th>
-      <th scope="col">Reviewed</th>
+      <th scope="col" class="text-center">Review</th>
       <th scope="col">Title</th>
       <th scope="col">Attribution</th>
     </tr>
   </thead>
   <tbody>
     {% for detailpage in object_list %}
-    <tr>
-      <td class="text-center">
-        <input id="accept_dp-{{ detailpage.pk }}" class="form-check-input" 
-              type="checkbox" value="{{ detailpage.pk }}" />
-      </td>
-      <td class="text-center">
-        <input id="reviewed_dp-{{ detailpage.pk }}" class="form-check-input" 
-              type="checkbox" value="{{ detailpage.pk }}" />
+    <tr id="dp_row_{{ detailpage.pk }}">  
+      <td class="text-center slider">
+        <input type="range" min="0" max="2" value="{{ detailpage.approved }}" id="dp_slider_{{ detailpage.pk }}" list="accept-reject_{{ detailpage.pk }}" />
+        <datalist id="accept-reject_{{ detailpage.pk }}">
+          <option value="0" label="Reject"></option>
+          <option value="1"></option>
+          <option value="2" label="Approve"></option>
+        </datalist>
       </td>
       <td>
-        <a href="{{ detailpage.get_absolute_url }}">
+        <a href="{{ detailpage.url }}">
           {{ detailpage.title }}
         </a>
       </td>

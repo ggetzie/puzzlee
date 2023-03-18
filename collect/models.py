@@ -29,8 +29,9 @@ class DetailPage(models.Model):
     last_visited = models.DateTimeField(blank=True, null=True)
     response_code = models.PositiveSmallIntegerField(blank=True, null=True)
     tokens = models.ManyToManyField("AttributionToken")
-    is_candidate = models.BooleanField(default=False)
-    reviewed = models.BooleanField(default=False)
+    approved = models.PositiveSmallIntegerField(
+        choices=((0, "Rejected"), (1, "Unset"), (2, "Approved")), default=1
+    )
 
     def __str__(self):
         return self.title

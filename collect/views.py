@@ -49,11 +49,10 @@ class FilteredDetail(UserIsStaffMixin, ListView):
 
 @require_POST
 @user_is_staff_api
-def set_candidate(request):
-    dp_id = request.POST["detailpage_id"]
+def set_candidate(request, dp_id):
     try:
         dp = DetailPage.objects.get(id=dp_id)
-        dp.is_candidate = request.POST["is_candidate"]
+        dp.is_candidate = request.POST["value"]
         dp.save()
     except DetailPage.DoesNotExist:
         return JsonResponse(
@@ -64,11 +63,10 @@ def set_candidate(request):
 
 @require_POST
 @user_is_staff_api
-def set_approved(request):
-    dp_id = request.POST["detailpage_id"]
+def set_approved(request, dp_id):
     try:
         dp = DetailPage.objects.get(id=dp_id)
-        dp.approved = request.POST["approved"]
+        dp.approved = request.POST["value"]
         dp.save()
     except DetailPage.DoesNotExist:
         return JsonResponse(

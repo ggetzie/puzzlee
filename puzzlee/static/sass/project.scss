@@ -107,3 +107,18 @@ a {
   color: #ffffff;
 }
 /* End autocomplete */
+
+.is_candidate {
+  background-color: #1e90ff44;
+}
+
+datalist {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+input[type=range] {
+  appearance: none;
+  background-color: #fff;
+}

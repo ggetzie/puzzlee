@@ -131,4 +131,11 @@ if (ale) {
   artist_input = document.getElementById("id_artist_fullname");
   autocomplete(artist_input, artist_list);
 }
-// diff
+
+function setDPFlag(endpoint, dp_id, value) {
+  const row = document.getElementById(`dp_row_${dp_id}`);
+  row.classList.toggle("is_candidate");
+  const approved_cb = document.getElementById(`reviewed_dp_${dp_id}`);
+  approved_cb.setAttribute("checked", true);
+  approved_cb.setAttribute("disabled", true);
+}
