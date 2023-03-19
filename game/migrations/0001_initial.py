@@ -48,7 +48,7 @@ class Migration(migrations.Migration):
                 (
                     "image",
                     models.ImageField(
-                        upload_to=game.models.artwork_image_path, verbose_name="Image"
+                        upload_to=game.models.get_image_path, verbose_name="Image"
                     ),
                 ),
                 (

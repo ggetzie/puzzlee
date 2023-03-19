@@ -15,7 +15,7 @@ class CreateArtworkForm(forms.ModelForm):
 
     class Meta:
         model = Artwork
-        fields = ("title", "year", "image", "description", "added_by")
+        fields = ("title", "year", "description", "added_by")
         widgets = {"added_by": forms.HiddenInput()}
 
     def __init__(self, *args, **kwargs):

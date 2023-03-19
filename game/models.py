@@ -8,7 +8,7 @@ from django.utils import timezone
 User = get_user_model()
 
 
-def artwork_image_path(instance, filename):
+def get_image_path(instance, filename):
     stem, ext = filename.rsplit(".", maxsplit=1)
     ext = ext.lower()
     if ext == "jpg":
@@ -29,7 +29,6 @@ class Artwork(models.Model):
     title = models.CharField(max_length=150)
     slug = models.SlugField(max_length=150)
     artist = models.ForeignKey("Artist", on_delete=models.CASCADE)
-    image = models.ImageField("Image", upload_to=artwork_image_path)
     featured = models.DateField(
         "Next featured date", unique=True, default=get_next_featured
     )
@@ -50,6 +49,23 @@ class Artwork(models.Model):
 
     def get_absolute_url(self):
         return reverse("game:artwork_detail", kwargs={"pk": self.pk})
+
+
+class ArtworkImage(models.Model):
+    artwork = models.ForeignKey("Artwork", on_delete=models.CASCADE, null=True)
+    detailpage = models.ForeignKey(
+        "collect.DetailPage", on_delete=models.SET_NULL, null=True
+    )
+    source = models.URLField()
+    image = models.ImageField(upload_to=get_image_path)
+
+    def __str__(self):
+        if self.artwork:
+            return f"image - {self.artwork.title}"
+        elif self.detailpage:
+            return f"image - {self.detailpage}"
+        else:
+            return f"ArtworkImage: {self.id}"
 
 
 class Artist(models.Model):

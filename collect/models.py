@@ -32,6 +32,8 @@ class DetailPage(models.Model):
     approved = models.PositiveSmallIntegerField(
         choices=((0, "Rejected"), (1, "Unset"), (2, "Approved")), default=1
     )
+    artist_name = models.CharField(max_length=150, default="")
+    year = models.CharField(max_length=50, default="")
 
     def __str__(self):
         return self.title
