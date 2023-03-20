@@ -52,8 +52,8 @@ class Artwork(models.Model):
 
 
 class ArtworkImage(models.Model):
-    artwork = models.ForeignKey("Artwork", on_delete=models.CASCADE, null=True)
-    detailpage = models.ForeignKey(
+    artwork = models.OneToOneField("Artwork", on_delete=models.CASCADE, null=True)
+    detailpage = models.OneToOneField(
         "collect.DetailPage", on_delete=models.SET_NULL, null=True
     )
     source = models.URLField()
