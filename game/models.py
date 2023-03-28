@@ -8,15 +8,6 @@ from django.utils import timezone
 User = get_user_model()
 
 
-def get_image_path(instance, filename):
-    stem, ext = filename.rsplit(".", maxsplit=1)
-    ext = ext.lower()
-    if ext == "jpg":
-        ext = "jpeg"
-    path = f"images/artworks/{instance.id}/{stem.lower()}.{ext}"
-    return path
-
-
 def get_next_featured():
     artworks = Artwork.objects.order_by("-featured")
     if artworks.count() == 0:
@@ -51,6 +42,15 @@ class Artwork(models.Model):
         return reverse("game:artwork_detail", kwargs={"pk": self.pk})
 
 
+def get_image_path(instance, filename):
+    stem, ext = filename.rsplit(".", maxsplit=1)
+    ext = ext.lower()
+    if ext == "jpg":
+        ext = "jpeg"
+    path = f"raw/images/artworks/{instance.id}/{stem.lower()}.{ext}"
+    return path
+
+
 class ArtworkImage(models.Model):
     artwork = models.OneToOneField("Artwork", on_delete=models.CASCADE, null=True)
     detailpage = models.OneToOneField(
@@ -82,7 +82,7 @@ class Artist(models.Model):
         return reverse("game:artist_detail", kwargs={"pk": self.pk})
 
     def __str__(self):
-        return self.fullname
+        return f"{self.fullname}"
 
     def save(self, *args, **kwargs):
         self.answer_slug = slugify(self.answer)

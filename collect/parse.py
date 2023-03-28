@@ -1,6 +1,12 @@
+import io
+import time
+
+from django.core.files.base import ContentFile
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import requests
 from bs4 import BeautifulSoup
 
-from collect.models import ListPage, DetailPage, AttributionToken
+from collect.models import AttributionToken, DetailPage, ListPage
 from game.models import ArtworkImage
 
 
@@ -72,3 +78,38 @@ def met_parse_detailpages():
         page.parsed = True
         page.save()
         image.save()
+
+
+HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) "
+        "AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1.2 Safari/605.1.15"
+    )
+}
+
+
+def save_image(artwork_image: ArtworkImage):
+    filename = artwork_image.source.rsplit("/", maxsplit=1)[-1]
+    r = requests.get(artwork_image.source, timeout=30, headers=HEADERS)
+    buffer = io.BytesIO(r.content)
+    cf = ContentFile(buffer.getvalue())
+
+    artwork_image.image = InMemoryUploadedFile(
+        cf,
+        field_name=None,
+        name=filename,
+        content_type="image/jpeg",
+        size=cf.tell,
+        charset=None,
+    )
+    artwork_image.save()
+
+
+def save_images():
+    missing = ArtworkImage.objects.filter(image__exact="").exclude(source="")
+    total = missing.count()
+    for i, im in enumerate(missing):
+        print(f"{i:04}/{total} - {im.detailpage.title}")
+        print(im.source)
+        save_image(im)
+        time.sleep(2)

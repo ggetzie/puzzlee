@@ -2,7 +2,6 @@ from typing import Any, Dict
 
 from django.db.models import QuerySet
 from django.http import JsonResponse
-from django.shortcuts import render
 from django.views.decorators.http import require_POST
 from django.views.generic import ListView, DetailView
 
