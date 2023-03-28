@@ -37,7 +37,7 @@ class DetailPage(models.Model):
     parsed = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.title
+        return f"{self.title}"
 
     def get_absolute_url(self):
         return reverse("collect:detailpage_detail", kwargs={"pk": self.pk})
@@ -50,7 +50,7 @@ class AttributionToken(models.Model):
         ordering = ("value",)
 
     def __str__(self):
-        return self.value[:100]
+        return self.value[:100]  # pylint: disable=unsubscriptable-object
 
     def get_absolute_url(self):
         return reverse("collect:attributetoken_detail", kwargs={"pk": self.pk})

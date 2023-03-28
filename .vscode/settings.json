@@ -14,5 +14,6 @@
     "maxsplit",
     "openaccess",
     "puzzlee"
-  ]
+  ],
+  "python.linting.enabled": false
 }

@@ -4,7 +4,7 @@
 <h1>List Pages</h1>
 <h2>Filtered</h2>
 <p>
-  <a href="{% url 'collect:detail_filtered' 'met' %}">Met</a>
+  <a href="{% url 'collect:detail_filtered' 'met' 1 %}">Met</a>
 </p>
 <ul class="list-group">
   {% for lp in object_list %}

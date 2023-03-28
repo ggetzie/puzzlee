@@ -1,4 +1,5 @@
 import datetime
+from typing import Literal
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
@@ -6,6 +7,8 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 
 User = get_user_model()
+
+IMAGE_SIZE = Literal["320", "408", "576", "768", "992", "1200", "orig", "thumbnail"]
 
 
 def get_next_featured():
@@ -66,6 +69,15 @@ class ArtworkImage(models.Model):
             return f"image - {self.detailpage}"
         else:
             return f"ArtworkImage: {self.id}"
+
+    def get_size(self, size: IMAGE_SIZE) -> str:
+
+        # pylint: disable=no-member
+        root = self.image.url.rsplit("/", maxsplit=1)[0].replace("/raw/", "/processed/")
+        return f"{root}/{size}.jpeg"
+
+    def get320(self):
+        return self.get_size("320")
 
 
 class Artist(models.Model):

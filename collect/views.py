@@ -35,7 +35,8 @@ class FilteredDetail(UserIsStaffMixin, ListView):
     def get_queryset(self) -> QuerySet[Any]:
         qs = super().get_queryset()
         institution = self.kwargs["institution"]
-        qs = qs.filter(parent__institution=institution)
+        approved = self.kwargs["approved"]
+        qs = qs.filter(parent__institution=institution, approved=approved)
         if institution == "met":
             qs = qs.filter(attribution__regex=r",\D*\d{4}")
         return qs
@@ -43,6 +44,10 @@ class FilteredDetail(UserIsStaffMixin, ListView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context["institution"] = self.kwargs["institution"]
+        context["approved"] = self.kwargs["approved"]
+        context[
+            "approved_choices"
+        ] = DetailPage.approved.field.choices  # pylint: disable=no-member
         return context
 
 
