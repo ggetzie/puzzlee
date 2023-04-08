@@ -6,6 +6,7 @@ from django.views.decorators.http import require_POST
 from django.views.generic import ListView, DetailView
 
 from collect.models import ListPage, DetailPage
+from collect.forms import ApprovalForm
 from core.views import UserIsStaffMixin
 from core.decorators import user_is_staff_api
 
@@ -36,9 +37,13 @@ class FilteredDetail(UserIsStaffMixin, ListView):
         qs = super().get_queryset()
         institution = self.kwargs["institution"]
         approved = self.kwargs["approved"]
-        qs = qs.filter(parent__institution=institution, approved=approved)
-        if institution == "met":
-            qs = qs.filter(attribution__regex=r",\D*\d{4}")
+        qs = (
+            qs.filter(parent__institution=institution, approved=approved)
+            .exclude(artworkimage__image__exact="")
+            .exclude(artist_name="")
+            .exclude(title="")
+            .exclude(year="")
+        )
         return qs
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
@@ -53,27 +58,9 @@ class FilteredDetail(UserIsStaffMixin, ListView):
 
 @require_POST
 @user_is_staff_api
-def set_candidate(request, dp_id):
-    try:
-        dp = DetailPage.objects.get(id=dp_id)
-        dp.is_candidate = request.POST["value"]
-        dp.save()
-    except DetailPage.DoesNotExist:
-        return JsonResponse(
-            {"status": "error", "message": f"DetailPage with id {dp_id} not found"},
-            status=404,
-        )
-
-
-@require_POST
-@user_is_staff_api
-def set_approved(request, dp_id):
-    try:
-        dp = DetailPage.objects.get(id=dp_id)
-        dp.approved = request.POST["value"]
-        dp.save()
-    except DetailPage.DoesNotExist:
-        return JsonResponse(
-            {"status": "error", "message": f"DetailPage with id {dp_id} not found"},
-            status=404,
-        )
+def set_approved(request):
+    form = ApprovalForm(request.POST)
+    if form.is_valid():
+        return JsonResponse({"status": "success"})
+    else:
+        return JsonResponse({"status": "error", "message": form.errors}, status=400)

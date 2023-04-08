@@ -132,10 +132,25 @@ if (ale) {
   autocomplete(artist_input, artist_list);
 }
 
-function setDPFlag(endpoint, dp_id, value) {
-  const row = document.getElementById(`dp_row_${dp_id}`);
-  row.classList.toggle("is_candidate");
-  const approved_cb = document.getElementById(`reviewed_dp_${dp_id}`);
-  approved_cb.setAttribute("checked", true);
-  approved_cb.setAttribute("disabled", true);
+const APPROVAL_OPTIONS = {
+  rejected: 0,
+  unset: 1,
+  approved: 2,
+};
+
+async function setApproved(endpoint, dp_id, approved) {
+  await fetch(endpoint, { detailpage: dp_id, approved: approved })
+    .then((response) => {
+      response.json();
+    })
+    .then((data) => {
+      if (data.status === "success") {
+        console.log("success");
+      } else {
+        console.log(data.message);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }

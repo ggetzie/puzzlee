@@ -1,5 +1,5 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout, Div, Field
+from crispy_forms.layout import Submit, Layout, Div
 from django import forms
 
 from game.models import Artwork, Artist
@@ -41,7 +41,7 @@ class CreateArtworkForm(forms.ModelForm):
             )
         )
 
-    def save(self):
+    def save(self, *args, **kwargs):
         user = self.cleaned_data["added_by"]
         artist, _ = Artist.objects.get_or_create(
             answer=self.cleaned_data["artist_answer"],

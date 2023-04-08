@@ -21,6 +21,7 @@ class ListPage(models.Model):
 
 
 class DetailPage(models.Model):
+    APPROVED_CHOICES = ((0, "Rejected"), (1, "Unset"), (2, "Approved"))
     url = models.URLField()
     html = models.TextField(blank=True, default="")
     title = models.CharField(max_length=500, default="")
@@ -29,9 +30,7 @@ class DetailPage(models.Model):
     last_visited = models.DateTimeField(blank=True, null=True)
     response_code = models.PositiveSmallIntegerField(blank=True, null=True)
     tokens = models.ManyToManyField("AttributionToken")
-    approved = models.PositiveSmallIntegerField(
-        choices=((0, "Rejected"), (1, "Unset"), (2, "Approved")), default=1
-    )
+    approved = models.PositiveSmallIntegerField(choices=APPROVED_CHOICES, default=1)
     artist_name = models.CharField(max_length=150, default="")
     year = models.CharField(max_length=50, default="")
     parsed = models.BooleanField(default=False)

@@ -15,8 +15,8 @@
 <div class="row mb-2">
   {% for detailpage in object_list %}
   <div class="col-md-4">
-    <div class="card p-1">
-      <img src="{{ detailpage.artworkimage.get320 }}" class="img-fluid text-center" loading="lazy" />
+    <div class="card p-2">
+      <img src="{{ detailpage.artworkimage.get320 }}" class="text-center" loading="lazy" />
       <h5 class="card-title mb-1">
         <a href="{{ detailpage.url }}">
           {{ detailpage.title }}
@@ -24,6 +24,15 @@
       </h5>
       <p class="m-0">{{ detailpage.artist_name|default:"Unknown Artist" }}</p>
       <p class="m-0">{{ detailpage.year }}</p>
+      <div class="row p-2">
+        <div class="col text-center">
+          <a class="btn btn-secondary" onClick="rejectDetailPage({{ detailpage.id }});">Reject</a>
+
+        </div>
+        <div class="col text-center">
+          <a class="btn btn-success" onClick="approveDetailPage({{ detailpage.id }})">Approve</a>
+        </div>
+      </div>
     </div>
   </div>
   {% if forloop.counter|divisibleby:"3" %}</div><div class="row mb-2">{% endif %}
