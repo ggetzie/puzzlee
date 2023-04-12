@@ -3,6 +3,7 @@
     "KHTML",
     "artworkimage",
     "attributetoken",
+    "csrftoken",
     "detailpage",
     "detailpages",
     "dtype",

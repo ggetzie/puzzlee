@@ -138,14 +138,52 @@ const APPROVAL_OPTIONS = {
   approved: 2,
 };
 
-async function setApproved(endpoint, dp_id, approved) {
-  await fetch(endpoint, { detailpage: dp_id, approved: approved })
+function updateCard(dp_id, approved) {
+  let col = document.getElementById(`dp_col_${dp_id}`);
+  switch (approved) {
+    case APPROVAL_OPTIONS.rejected:
+      col.innerHTML = `<p>Moved to rejected</p>`;
+      break;
+    case APPROVAL_OPTIONS.unset:
+      col.innerHTML = `<p>Moved to unset</p>`;
+      break;
+    case APPROVAL_OPTIONS.approved:
+      col.innerHTML = `<p>Moved to approved</p>`;
+      break;
+    default:
+      break;
+  }
+}
+
+function setApproved(dp_id, approved) {
+  const csrftoken = document.querySelector(
+    "input[name=csrfmiddlewaretoken]"
+  ).value;
+  const data = {
+    detailpage: dp_id,
+    approved: approved,
+  };
+
+  // define APPROVAL_ENDPOINT with inline script tag on page using url template tag
+  fetch(APPROVAL_ENDPOINT, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": csrftoken,
+      Accept: "application/json",
+      "X-Requested-With": "XMLHttpRequest",
+    },
+    body: JSON.stringify(data),
+  })
     .then((response) => {
-      response.json();
+      console.log(response);
+      return response.json();
     })
     .then((data) => {
+      console.log(data);
       if (data.status === "success") {
         console.log("success");
+        updateCard(dp_id, approved);
       } else {
         console.log(data.message);
       }

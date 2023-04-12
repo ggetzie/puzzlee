@@ -29,7 +29,7 @@ detailpage_urls = [
         view=views.FilteredDetail.as_view(),
         name="detail_filtered",
     ),
-    path("set_approved/<int:dp_id>", view=views.set_approved, name="set_approved"),
+    path("set_approved/", view=views.set_approved, name="set_approved"),
 ]
 
 

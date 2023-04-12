@@ -1,3 +1,4 @@
+import json
 from typing import Any, Dict
 
 from django.db.models import QuerySet
@@ -43,6 +44,7 @@ class FilteredDetail(UserIsStaffMixin, ListView):
             .exclude(artist_name="")
             .exclude(title="")
             .exclude(year="")
+            .order_by("artist_name", "title")
         )
         return qs
 
@@ -59,8 +61,11 @@ class FilteredDetail(UserIsStaffMixin, ListView):
 @require_POST
 @user_is_staff_api
 def set_approved(request):
-    form = ApprovalForm(request.POST)
+    data = json.loads(request.body)
+    print(data)
+    form = ApprovalForm(data)
     if form.is_valid():
+        form.save()
         return JsonResponse({"status": "success"})
     else:
         return JsonResponse({"status": "error", "message": form.errors}, status=400)
