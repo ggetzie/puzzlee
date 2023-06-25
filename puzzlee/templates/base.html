@@ -40,6 +40,7 @@
   </head>
 
   <body>
+    {% if request.user.is_authenticated %}
     <div class="mb-1">
       <nav class="navbar navbar-expand-md navbar-light bg-light">
         <div class="container-fluid">
@@ -52,7 +53,9 @@
             <div class="d-flex justify-content-between w-100">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="{% url 'home' %}">Home <span class="visually-hidden">(current)</span></a>
+                <a class="nav-link" href="{% url 'home' %}">
+                  Home <span class="visually-hidden">(current)</span>
+                </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'about' %}">About</a>
@@ -70,7 +73,6 @@
               {% endif %}
             </ul>
             <ul class="navbar-nav ml-auto">
-              {% if request.user.is_authenticated %}
                 <li class="nav-item">
                   {# URL provided by django-allauth/account/urls.py #}
                   <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{{ request.user.username }}</a>
@@ -79,20 +81,13 @@
                   {# URL provided by django-allauth/account/urls.py #}
                   <a class="nav-link" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>
                 </li>
-              {% else %}
-                <li class="nav-item">
-                  {# URL provided by django-allauth/account/urls.py #}
-                  <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% translate "Sign In" %}</a>
-                </li>
-              {% endif %}
-
             </ul>
             </div>
           </div>
         </div>
       </nav>
-
     </div>
+    {% endif %}
 
     <div class="container">
       <main>
@@ -112,7 +107,7 @@
     </div> <!-- /container -->
     <footer class="bg-light">
         <div class="container text-center text-muted">
-          ©️ 2023 <a href="https://kotsf.com">Kotsf Limited</a>
+          <a href="{% url 'account_login' %}">©️</a> 2023 <a href="https://kotsf.com">Kotsf Limited</a>
           with <a href="https://msteinberg.art">Monica Steinberg</a>
         </div>
       </footer>

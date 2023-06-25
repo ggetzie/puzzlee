@@ -1,1 +1,10 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1 class="display-1 text-center">Puzzlee</h1>
+<div class="w-100 d-flex flex-direction-column align-items-center mb-3">
+  <img src="{% static 'images/question-768.jpg' %}" class="img-fluid rounded m-auto"/>
+</div>
+
+{% endblock content %}
