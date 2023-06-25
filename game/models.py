@@ -9,6 +9,7 @@ from django.utils import timezone
 User = get_user_model()
 
 IMAGE_SIZE = Literal["320", "408", "576", "768", "992", "1200", "orig", "thumbnail"]
+BREAKPOINTS = ("1200", "992", "768", "576", "408", "320")
 
 
 def get_next_featured():
@@ -78,6 +79,9 @@ class ArtworkImage(models.Model):
 
     def get320(self):
         return self.get_size("320")
+
+    def get576(self):
+        return self.get_size("576")
 
 
 class Artist(models.Model):

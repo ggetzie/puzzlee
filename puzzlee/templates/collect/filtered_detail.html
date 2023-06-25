@@ -5,7 +5,7 @@
 <nav class="nav nav-pills mt-3 mb-3">
   {% for c in approved_choices %}
   <a 
-    class="nav-link{% if c|first == approved %} active{% endif %}"
+    class="nav-link{% if c|first == approval_status %} active{% endif %}"
     href="{% url 'collect:detail_filtered' institution c|first %}"
     >
     {{ c|last }}
@@ -29,7 +29,7 @@
       
       <div class="row p-2">
         <div class="col text-center">
-          {% if approved != 0 %}
+          {% if approval_status != 0 %}
           <a class="btn btn-secondary" 
              onClick="setApproved({{ detailpage.id }}, APPROVAL_OPTIONS.rejected);">
              Reject
@@ -37,14 +37,14 @@
           {% endif %}
         </div>
         <div class="col text-center">
-          {% if approved != 1 %}
+          {% if approval_status != 1 %}
           <a class="btn btn-secondary"
              onClick="setApproved({{ detailpage.id }}, APPROVAL_OPTIONS.unset);">Unset</a>
           </a>
           {% endif %}
         </div>
         <div class="col text-center">
-          {% if approved != 2 %}
+          {% if approval_status != 2 %}
           <a class="btn btn-success" 
              onClick="setApproved({{ detailpage.id }}, APPROVAL_OPTIONS.approved);">Approve</a>
         </div>
@@ -63,6 +63,25 @@
 {% include "pagination.html" %}
 {% endblock content %}
 
+{% block modal %}
+<div class="modal" tabindex="-1" id="add-artwork-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-5">Add new Artwork</h2>
+      </div>
+      <div class="modal-body" id="add-form-container">
+        <p>artwork form goes here</p>
+      </div>
+    </div>
+  </div>
+  
+</div>
+{% endblock modal %}
+
+
+
+
 {% block inline_javascript %}
-<script>const APPROVAL_ENDPOINT="{% url 'collect:set_approved' %}"</script>
+<script>const APPROVAL_ENDPOINT="{% url 'collect:set_status' %}"</script>
 {% endblock inline_javascript %}

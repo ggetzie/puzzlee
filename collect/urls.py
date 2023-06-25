@@ -25,11 +25,13 @@ listpage_urls = [
 detailpage_urls = [
     path("<int:pk>", view=views.DetailPageDetail.as_view(), name="detailpage_detail"),
     path(
-        "review/<str:institution>/<apr:approved>",
+        "review/<str:institution>/<apr:approval_status>",
         view=views.FilteredDetail.as_view(),
         name="detail_filtered",
     ),
-    path("set_approved/", view=views.set_approved, name="set_approved"),
+    path("set_status/", view=views.set_status, name="set_status"),
+    path("approve/<int:pk>/", view=views.approve_detailpage, name="approve"),
+    path("reject/", view=views.reject_detailpage, name="reject"),
 ]
 
 

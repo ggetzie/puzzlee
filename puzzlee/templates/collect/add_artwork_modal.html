@@ -1,0 +1,10 @@
+{% load crispy_forms_tags %}
+{% comment %} Form to create a new artwork from a detailpage
+to insert in the modal on the review page {% endcomment %}
+
+<img 
+src="{{ detailpage.artworkimage.get576 }}" 
+alt="{{ detailpage.title }}" 
+class="img-fluid" />
+
+{% crispy form %}
