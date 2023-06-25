@@ -274,7 +274,7 @@ puzzlee/media/
 .pytest_cache/
 
 .env
-project.css
-project.min.css
-vendors.js
-*.min.js
+# project.css
+# project.min.css
+# vendors.js
+# *.min.js
