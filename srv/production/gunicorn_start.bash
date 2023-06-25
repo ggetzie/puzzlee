@@ -33,7 +33,7 @@ exec $VENVDIR/bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
     --workers $NUM_WORKERS \
     --timeout $TIMEOUT \
     --user=$USER --group=$GROUP \
-    --bind 127.0.0.1:8000 \
+    --bind 127.0.0.1:8002 \
     --log-level=warning \
     --log-file=-
 
