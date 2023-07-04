@@ -1,7 +1,7 @@
-from storages.backends.s3boto3 import S3Boto3Storage
+from storages.backends.s3boto3 import S3Boto3Storage, S3ManifestStaticStorage
 
 
-class StaticRootS3Boto3Storage(S3Boto3Storage):
+class StaticRootS3Boto3Storage(S3ManifestStaticStorage):
     location = "static"
     # default_acl = "public-read"
 
