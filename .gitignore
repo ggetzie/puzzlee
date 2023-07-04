@@ -270,6 +270,7 @@ tags
 
 ### Project template
 puzzlee/media/
+/media/
 
 .pytest_cache/
 

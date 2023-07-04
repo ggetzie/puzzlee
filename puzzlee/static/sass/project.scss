@@ -60,8 +60,12 @@ footer a:hover {
   text-decoration: underline;
 }
 
-main {
-  min-height: calc(100vh - 96px);
+main.anon {
+  min-height: calc(100vh - 40px);
+}
+
+main.authenticated {
+  min-height: calc(100vh - 100px);
 }
 
 .number-input {

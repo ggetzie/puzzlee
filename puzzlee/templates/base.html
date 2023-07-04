@@ -93,7 +93,7 @@
     {% endif %}
 
     <div class="container">
-      <main>
+      <main class="{% if request.user.is_authenticated %}authenticated{% else %}anon{% endif %}">
       {% if messages %}
         {% for message in messages %}
           <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
