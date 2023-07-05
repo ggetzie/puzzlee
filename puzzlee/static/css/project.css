@@ -12639,3 +12639,19 @@ input[type=range] {
           appearance: none;
   background-color: #fff;
 }
+
+div.card-image-container {
+  width: 100%;
+  background-color: rgba(152, 152, 152, 0.6666666667);
+  padding: 5px 0;
+}
+
+img.card-image {
+  max-width: 310px;
+  max-height: 225px;
+}
+
+img.card-image:hover {
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
+}

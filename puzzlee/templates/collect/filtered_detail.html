@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="modal" tabindex="-1">
+  
+</div>
 <h1>Review detail pages for {{ institution }}</h1>
 <nav class="nav nav-pills mt-3 mb-3">
   {% for c in approved_choices %}
@@ -18,7 +21,9 @@
   {% for detailpage in object_list %}
   <div class="col-md-4" id="dp_col_{{ detailpage.id }}">
     <div class="card p-2">
-      <img src="{{ detailpage.artworkimage.get320 }}" class="text-center" loading="lazy" />
+      <div class="card-image-container text-center mb-2">
+        <img src="{{ detailpage.artworkimage.get320 }}" class="card-image" loading="lazy" />
+      </div>
       <h5 class="card-title mb-1">
         <a href="{{ detailpage.url }}">
           {{ detailpage.title }}

@@ -126,3 +126,18 @@ input[type=range] {
   appearance: none;
   background-color: #fff;
 }
+
+div.card-image-container {
+  width: 100%;
+  background-color: #989898aa;
+  padding: 5px 0;
+}
+
+img.card-image {
+  max-width: 310px;
+  max-height: 225px;
+}
+
+img.card-image:hover {
+  cursor: zoom-in;
+}
