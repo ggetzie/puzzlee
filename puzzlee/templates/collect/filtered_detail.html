@@ -1,19 +1,8 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<div class="modal" tabindex="-1" id="enlargedModal" aria-labelledby="enlargedModalTitle">
-  <div class="modal-dialog modal-fullscreen modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header text-bg-light">
-        <h1 class="modal-title fs-5" id="enlargedModalTitle">The Big Picture</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-center bg-light d-flex flex-column justify-content-center align-items-center">
-        <img src="" id="enlargedImage" />
-      </div>
-    </div>
-  </div>
-</div>
+
 <h1>Review detail pages for {{ institution }}</h1>
 <nav class="nav nav-pills mt-3 mb-3">
   {% for c in approved_choices %}
@@ -32,14 +21,14 @@
   <div class="col-md-4" id="dp_col_{{ detailpage.id }}">
     <div class="card p-2">
       <div class="card-image-container text-center mb-2">
-        <a onClick="showEnlarged('{{ detailpage.title }}', '{{ detailpage.artworkimage.get1200 }}');">
+        <a onClick="showEnlarged(`{{ detailpage.title }}`, '{{ detailpage.artworkimage.get1200 }}');">
           <img src="{{ detailpage.artworkimage.get320 }}" class="card-image" loading="lazy" />
         </a>
       </div>
-      <h5 class="card-title mb-1">
-        <a href="{{ detailpage.url }}">
+      <h5 class="card-title">
+        <a href="{{ detailpage.url }}" title="{{ detailpage.title}}">
           {{ detailpage.title }}
-        </a>
+          </a>
       </h5>
       <p class="m-0">{{ detailpage.artist_name|default:"Unknown Artist" }}</p>
       <p class="m-0">{{ detailpage.year }}</p>
@@ -64,8 +53,9 @@
           {% if approval_status != 2 %}
           <a class="btn btn-success" 
              onClick="setApproved({{ detailpage.id }}, APPROVAL_OPTIONS.approved);">Approve</a>
+          {% endif %}
         </div>
-        {% endif %}
+        
       </div>
     </div>
   </div>
@@ -81,21 +71,35 @@
 {% endblock content %}
 
 {% block modal %}
-<div class="modal" tabindex="-1" id="add-artwork-modal">
-  <div class="modal-dialog">
+<div class="modal" tabindex="-1" id="enlargedModal" aria-labelledby="enlargedModalTitle">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title fs-5">Add new Artwork</h2>
+      <div class="modal-header text-bg-light">
+        <h1 class="modal-title fs-5" id="enlargedModalTitle">The Big Picture</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body" id="add-form-container">
-        <p>artwork form goes here</p>
+      <div class="modal-body text-center bg-light d-flex flex-column justify-content-center align-items-center">
+        <img src="" id="enlargedImage" loading="lazy" />
       </div>
     </div>
   </div>
-  
 </div>
-{% endblock modal %}
 
+<div class="modal" tabindex="-1" id="approvalModal" aria-LabelledBy="approvalModalTitle">
+  <div class="modal-dialog modal-l modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header text-bg-light">
+        <h1 class="modal-title fs-5" id="approvalModalTitle">Approve Artwork</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Approval form here</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock modal %}
 
 
 
