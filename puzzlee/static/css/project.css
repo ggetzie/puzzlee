@@ -12655,3 +12655,7 @@ img.card-image:hover {
   cursor: -webkit-zoom-in;
   cursor: zoom-in;
 }
+
+img#enlargedImage {
+  max-width: 1090px;
+}

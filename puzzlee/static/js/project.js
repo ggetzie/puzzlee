@@ -192,3 +192,13 @@ function setApproved(dp_id, approved) {
       console.log(error);
     });
 }
+
+function showEnlarged(title, origUrl) {
+  const modal = new bootstrap.Modal(document.getElementById("enlargedModal"));
+  const enlargedImage = document.getElementById("enlargedImage");
+  enlargedImage.setAttribute("src", origUrl);
+  const enlargedTitle = document.getElementById("enlargedModalTitle");
+  enlargedTitle.textContent = title;
+  modal.show();
+  console.log(origUrl);
+}

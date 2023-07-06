@@ -72,7 +72,6 @@ class ArtworkImage(models.Model):
             return f"ArtworkImage: {self.id}"
 
     def get_size(self, size: IMAGE_SIZE) -> str:
-
         # pylint: disable=no-member
         root = self.image.url.rsplit("/", maxsplit=1)[0].replace("/raw/", "/processed/")
         return f"{root}/{size}.jpeg"
@@ -82,6 +81,12 @@ class ArtworkImage(models.Model):
 
     def get576(self):
         return self.get_size("576")
+
+    def get1200(self):
+        return self.get_size("1200")
+
+    def get_orig(self):
+        return self.get_size("orig")
 
 
 class Artist(models.Model):

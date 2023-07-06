@@ -1,8 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="modal" tabindex="-1">
-  
+<div class="modal" tabindex="-1" id="enlargedModal" aria-labelledby="enlargedModalTitle">
+  <div class="modal-dialog modal-fullscreen modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header text-bg-light">
+        <h1 class="modal-title fs-5" id="enlargedModalTitle">The Big Picture</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center bg-light d-flex flex-column justify-content-center align-items-center">
+        <img src="" id="enlargedImage" />
+      </div>
+    </div>
+  </div>
 </div>
 <h1>Review detail pages for {{ institution }}</h1>
 <nav class="nav nav-pills mt-3 mb-3">
@@ -22,7 +32,9 @@
   <div class="col-md-4" id="dp_col_{{ detailpage.id }}">
     <div class="card p-2">
       <div class="card-image-container text-center mb-2">
-        <img src="{{ detailpage.artworkimage.get320 }}" class="card-image" loading="lazy" />
+        <a onClick="showEnlarged('{{ detailpage.title }}', '{{ detailpage.artworkimage.get1200 }}');">
+          <img src="{{ detailpage.artworkimage.get320 }}" class="card-image" loading="lazy" />
+        </a>
       </div>
       <h5 class="card-title mb-1">
         <a href="{{ detailpage.url }}">
