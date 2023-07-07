@@ -56,6 +56,7 @@ class FilteredDetail(UserIsStaffMixin, ListView):
         context["institution"] = self.kwargs["institution"]
         context["approval_status"] = self.kwargs["approval_status"]
         context["approved_choices"] = DetailPage.APPROVED_CHOICES
+        context["approve_form"] = ApproveForm()
         return context
 
 

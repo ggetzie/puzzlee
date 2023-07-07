@@ -202,3 +202,19 @@ function showEnlarged(title, origUrl) {
   modal.show();
   console.log(origUrl);
 }
+
+// Ids
+// form               - id_approval_form
+// title input        - id_title
+// artist_fullname    - id_artist_fullname
+// artist_answer      - id_artist_answer
+// submit             - id_approval_submit
+// image              - id_approval_image
+
+function showApprovalForm(dp_id, dp_title, dp_artist_fullname, imageUrl) {
+  const modal = new bootstrap.Modal(document.getElementById("approvalModal"));
+  const dp_id_input = document.getElementById("id_detailpage");
+  const dp_artist_fullname_input =
+    document.getElementById("id_artist_fullname");
+  modal.show();
+}
