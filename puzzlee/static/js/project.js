@@ -202,3 +202,10 @@ function showEnlarged(title, origUrl) {
   modal.show();
   console.log(origUrl);
 }
+
+function showApprovalForm(dp_id, dp_title, dp_artist_fullname, imageUrl) {
+  const modal = new bootstrap.Modal(document.getElementById("approvalModal"));
+  const dp_id_input = document.getElementById("id_detailpage")
+  const dp_artist_fullname_input = document.getElementById("id_artist_fullname")
+  modal.show();
+}

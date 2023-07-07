@@ -1,3 +1,5 @@
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, Div, Submit
 from django import forms
 from collect.models import DetailPage
 from game.models import Artwork, Artist, ArtworkImage
@@ -20,6 +22,22 @@ class ApproveForm(forms.Form):
     artist_answer = forms.CharField(max_length=150)
     title = forms.CharField(max_length=150)
     artist_fullname = forms.CharField(max_length=150)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = "id_approval_form"
+        self.helper.layout = Layout(
+            Fieldset("", "detailpage", "title", "artist_fullname", "artist_answer"),
+            Div(
+                Submit(
+                    "submit",
+                    "Submit",
+                    css_id="id_approval_submit",
+                ),
+                css_class="d-flex flex-row justify-content-end",
+            ),
+        )
 
     def save(self, user):
         dp = self.cleaned_data["detailpage"]
