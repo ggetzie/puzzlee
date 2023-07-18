@@ -214,7 +214,17 @@ function showEnlarged(title, origUrl) {
 function showApprovalForm(dp_id, dp_title, dp_artist_fullname, imageUrl) {
   const modal = new bootstrap.Modal(document.getElementById("approvalModal"));
   const dp_id_input = document.getElementById("id_detailpage");
+  dp_id_input.value = dp_id;
+
   const dp_artist_fullname_input =
     document.getElementById("id_artist_fullname");
+  dp_artist_fullname_input.value = dp_artist_fullname;
+
+  const dp_title_input = document.getElementById("id_title");
+  dp_title_input.value = dp_title;
+
+  const dp_image = document.getElementById("id_approval_image");
+  dp_image.setAttribute("src", imageUrl);
+
   modal.show();
 }

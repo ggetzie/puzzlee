@@ -82,6 +82,9 @@ class ArtworkImage(models.Model):
     def get576(self):
         return self.get_size("576")
 
+    def get768(self):
+        return self.get_size("768")
+
     def get1200(self):
         return self.get_size("1200")
 

@@ -52,7 +52,7 @@
         <div class="col text-center">
           {% if approval_status != 2 %}
           <a class="btn btn-success" 
-             onClick="showApprovalForm({{ detailpage.id}}, `{{ detailpage.title }}`, `{{ detailpage.artist_name|default:'Unknown Artst' }}`, '{{ detailpage.artworkimage.get1200 }}');">
+             onClick="showApprovalForm({{ detailpage.id}}, `{{ detailpage.title }}`, `{{ detailpage.artist_name|default:'Unknown Artst' }}`, '{{ detailpage.artworkimage.get768 }}');">
              Approve
           </a>
           {% endif %}
@@ -88,15 +88,19 @@
 </div>
 
 <div class="modal" tabindex="-1" id="approvalModal" aria-LabelledBy="approvalModalTitle">
-  <div class="modal-dialog modal-l modal-dialog-centered modal-dialog-scrollable">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header text-bg-light">
         <h1 class="modal-title fs-5" id="approvalModalTitle">Approve Artwork</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
       </div>
       <div class="modal-body">
-        <img src="" loading="lazy" id="id_approval_image" />
-        {% crispy approve_form %}
+        <div class="modal-body text-center bg-light d-flex flex-column justify-content-center align-items-center">
+          <img src="" loading="lazy" id="id_approval_image" />
+        </div>
+        <div class="approve_form_container">
+          {% crispy approve_form %}
+        </div>
       </div>
     </div>
   </div>
