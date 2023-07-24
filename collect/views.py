@@ -1,10 +1,11 @@
 import json
 from typing import Any, Dict
 
+from django.contrib.auth.decorators import user_passes_test
 from django.db.models import QuerySet
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST, require_GET
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, FormView
 from django.shortcuts import get_object_or_404, render
 
 from collect.models import ListPage, DetailPage
@@ -62,6 +63,18 @@ class FilteredDetail(UserIsStaffMixin, ListView):
 
 @require_POST
 @user_is_staff_api
+def approve_detailpage(request):
+    data = json.loads(request.body)
+    form = ApproveForm(data)
+    if form.is_valid():
+        form.save(request.user)
+        return JsonResponse({"status": "success"})
+    else:
+        return JsonResponse({"status": "error", "message": form.errors}, status=400)
+
+
+@require_POST
+@user_is_staff_api
 def set_status(request):
     data = json.loads(request.body)
     form = SetStatusForm(data)
@@ -70,34 +83,6 @@ def set_status(request):
         return JsonResponse({"status": "success"})
     else:
         return JsonResponse({"status": "error", "message": form.errors}, status=400)
-
-
-@user_is_staff_api
-def approve_detailpage(request, pk):
-    if request.method == "GET":
-        dp = get_object_or_404(DetailPage, pk=pk)
-        artists = Artist.objects.filter(fullname__iequals=dp.artist_name)
-        initial = {"detailpage": dp.pk, "title": dp.title}
-        if artists.count() > 0:
-            initial["artist_answer"] = artists[0].answer
-            initial["artist_fullname"] = artists[0].fullname
-        form = ApproveForm(initial=initial)
-        return render(
-            request, "collect/add_artwork_modal.html", {"form": form, "detailpage": dp}
-        )
-
-    elif request.method == "POST":
-        data = json.loads(request.body)
-        form = ApproveForm(data)
-        if form.is_valid():
-            form.save(user=request.user)
-            return JsonResponse({"status": "success"})
-        else:
-            return JsonResponse({"status": "error", "message": form.errors}, status=400)
-    else:
-        return JsonResponse(
-            {"status": "error", "message": "Invalid method"}, status=400
-        )
 
 
 @require_POST

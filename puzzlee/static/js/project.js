@@ -155,17 +155,17 @@ function updateCard(dp_id, approved) {
   }
 }
 
-function setApproved(dp_id, approved) {
+function setStatus(dp_id, newStatus) {
   const csrftoken = document.querySelector(
     "input[name=csrfmiddlewaretoken]"
   ).value;
   const data = {
     detailpage: dp_id,
-    approved: approved,
+    approved: newStatus,
   };
 
   // define APPROVAL_ENDPOINT with inline script tag on page using url template tag
-  fetch(APPROVAL_ENDPOINT, {
+  fetch(SET_STATUS_ENDPOINT, {
     method: "post",
     headers: {
       "Content-Type": "application/json",
@@ -183,7 +183,7 @@ function setApproved(dp_id, approved) {
       console.log(data);
       if (data.status === "success") {
         console.log("success");
-        updateCard(dp_id, approved);
+        updateCard(dp_id, newStatus);
       } else {
         console.log(data.message);
       }
@@ -214,6 +214,7 @@ function showEnlarged(title, origUrl) {
 function showApprovalForm(dp_id, dp_title, dp_artist_fullname, imageUrl) {
   const modal = new bootstrap.Modal(document.getElementById("approvalModal"));
   const dp_id_input = document.getElementById("id_detailpage");
+  const suggested_answer = dp_artist_fullname.split(" ").slice(-1)[0];
   dp_id_input.value = dp_id;
 
   const dp_artist_fullname_input =
@@ -223,8 +224,50 @@ function showApprovalForm(dp_id, dp_title, dp_artist_fullname, imageUrl) {
   const dp_title_input = document.getElementById("id_title");
   dp_title_input.value = dp_title;
 
+  const dp_artist_answer = document.getElementById("id_artist_answer");
+  dp_artist_answer.value = suggested_answer;
+
   const dp_image = document.getElementById("id_approval_image");
   dp_image.setAttribute("src", imageUrl);
 
   modal.show();
+}
+
+async function submitApprovalForm(e) {
+  e.preventDefault();
+  const csrftoken = document.querySelector(
+    "form#id_approval_form > input[name=csrfmiddlewaretoken]"
+  ).value;
+  const form = document.getElementById("id_approval_form");
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+  console.log(data);
+  const response = await fetch(APPROVAL_ENDPOINT, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRFToken": csrftoken,
+      Accept: "application/json",
+      "X-Requested-With": "XMLHttpRequest",
+    },
+    body: JSON.stringify(data),
+  });
+  const responseData = await response.json();
+  if (responseData.status === "success") {
+    updateCard(data.detailpage, APPROVAL_OPTIONS.approved);
+    const modal = bootstrap.Modal.getInstance(
+      document.getElementById("approvalModal")
+    );
+    modal.hide();
+  } else if (responseData.status === "error") {
+    const error_div = document.getElementById("approval_form_errors");
+    error_div.innerHTML = `<p>${responseData.message}</p>`;
+  } else {
+    console.log(responseData);
+  }
+}
+
+const approvalForm = document.getElementById("id_approval_form");
+if (approvalForm) {
+  approvalForm.onsubmit = submitApprovalForm;
 }

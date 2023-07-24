@@ -47,9 +47,9 @@ class ApproveForm(forms.Form):
         dp.approved = 2
         dp.save()
         artist, _ = Artist.objects.get_or_create(
-            artist_answer=self.cleaned_data["artist_answer"],
+            answer=self.cleaned_data["artist_answer"],
             defaults={
-                "artist_name": self.cleaned_data["artist_fullname"],
+                "fullname": self.cleaned_data["artist_fullname"],
                 "added_by": user,
             },
         )

@@ -37,7 +37,7 @@
         <div class="col text-center">
           {% if approval_status != 0 %}
           <a class="btn btn-secondary" 
-             onClick="setApproved({{ detailpage.id }}, APPROVAL_OPTIONS.rejected);">
+             onClick="setStatus({{ detailpage.id }}, APPROVAL_OPTIONS.rejected);">
              Reject
           </a>
           {% endif %}
@@ -45,7 +45,7 @@
         <div class="col text-center">
           {% if approval_status != 1 %}
           <a class="btn btn-secondary"
-             onClick="setApproved({{ detailpage.id }}, APPROVAL_OPTIONS.unset);">Unset</a>
+             onClick="setStatus({{ detailpage.id }}, APPROVAL_OPTIONS.unset);">Unset</a>
           </a>
           {% endif %}
         </div>
@@ -92,13 +92,14 @@
     <div class="modal-content">
       <div class="modal-header text-bg-light">
         <h1 class="modal-title fs-5" id="approvalModalTitle">Approve Artwork</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+        <button id="approval_modal_close" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
       </div>
       <div class="modal-body">
         <div class="modal-body text-center bg-light d-flex flex-column justify-content-center align-items-center">
           <img src="" loading="lazy" id="id_approval_image" />
         </div>
         <div class="approve_form_container">
+          <div id="approval_form_errors"></div>
           {% crispy approve_form %}
         </div>
       </div>
@@ -111,5 +112,8 @@
 
 
 {% block inline_javascript %}
-<script>const APPROVAL_ENDPOINT="{% url 'collect:set_status' %}"</script>
+<script>
+  const SET_STATUS_ENDPOINT="{% url 'collect:set_status' %}";
+  const APPROVAL_ENDPOINT="{% url 'collect:approve' %}";
+</script>
 {% endblock inline_javascript %}

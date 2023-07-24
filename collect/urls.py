@@ -30,7 +30,7 @@ detailpage_urls = [
         name="detail_filtered",
     ),
     path("set_status/", view=views.set_status, name="set_status"),
-    path("approve/<int:pk>/", view=views.approve_detailpage, name="approve"),
+    path("approve/", view=views.approve_detailpage, name="approve"),
     path("reject/", view=views.reject_detailpage, name="reject"),
 ]
 
