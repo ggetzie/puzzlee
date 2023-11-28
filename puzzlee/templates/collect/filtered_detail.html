@@ -52,7 +52,7 @@
         <div class="col text-center">
           {% if approval_status != 2 %}
           <a class="btn btn-success" 
-             onClick="showApprovalForm({{ detailpage.id}}, `{{ detailpage.title }}`, `{{ detailpage.artist_name|default:'Unknown Artst' }}`, '{{ detailpage.artworkimage.get768 }}');">
+             onClick="showApprovalForm({{ detailpage.id}}, '{{ detailpage.title }}', '{{ detailpage.artist_name|default:'Unknown Artst' }}', '{{ detailpage.artworkimage.get768 }}');">
              Approve
           </a>
           {% endif %}
