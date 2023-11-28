@@ -7,11 +7,13 @@
 {% block content %}
 <div class="center-narrow">
   <h1>{{ object.fullname }}</h1>
+  <p>Slug: {{ object.name_slug}}</p>
   <h2>Artworks</h2>
   <ul class="list-group">
   {% for artwork in object.artwork_set.all %}
   <li class="list-group-item">
-    <a href="{artwork.get_absolute_url}">{{ artwork.title }}</a>
+  <img src="{{ artwork.artworkimage.get_thumb }}" alt="{{ artwork.title }}" class="img-thumbnail me-3">
+    <a href="{{ artwork.get_absolute_url }}">{{ artwork.title }}</a>
   </li>
   {% empty %}
   <li class="list-group-item">

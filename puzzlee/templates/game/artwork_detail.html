@@ -8,8 +8,8 @@
 <div class="center-narrow">
   <h1>{{ object.title }}</h1>
   
-  <img src="{{ object.image.url }}" class="img-fluid m-auto" />
-  <p>by {{ object.artist.fullname }} {{ object.year }}</p>
+  <img src="{{ object.artworkimage.get768 }}" class="img-fluid m-auto" />
+  <p>by <a href="{{ object.artist.get_absolute_url }}">{{ object.artist.fullname }}</a> {{ object.year }}</p>
   <p>
     {{ object.description}}
   </p>

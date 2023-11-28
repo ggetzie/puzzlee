@@ -76,6 +76,9 @@ class ArtworkImage(models.Model):
         root = self.image.url.rsplit("/", maxsplit=1)[0].replace("/raw/", "/processed/")
         return f"{root}/{size}.jpeg"
 
+    def get_thumb(self):
+        return self.get_size("thumbnail")
+
     def get320(self):
         return self.get_size("320")
 
@@ -94,7 +97,7 @@ class ArtworkImage(models.Model):
 
 class Artist(models.Model):
     fullname = models.CharField("Full Name", max_length=150)
-    name_slug = models.SlugField("Name Slug", max_length=150, default="")
+    name_slug = models.SlugField("Name Slug", max_length=150, default="", unique=True)
     added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     created_at = models.DateTimeField("Created at", default=timezone.now)
 

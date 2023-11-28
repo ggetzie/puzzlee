@@ -1,6 +1,7 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Div, Submit
 from django import forms
+from django.utils.text import slugify
 from collect.models import DetailPage
 from game.models import Artwork, Artist, ArtworkImage
 
@@ -43,7 +44,7 @@ class ApproveForm(forms.Form):
         dp.approved = 2
         dp.save()
         artist, _ = Artist.objects.get_or_create(
-            answer=self.cleaned_data["artist_answer"],
+            name_slug=slugify(self.cleaned_data["artist_fullname"]),
             defaults={
                 "fullname": self.cleaned_data["artist_fullname"],
                 "added_by": user,
