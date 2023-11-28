@@ -213,21 +213,30 @@ function showEnlarged(title, origUrl) {
 
 function showApprovalForm(dp_id, dp_title, dp_artist_fullname, imageUrl) {
   const modal = new bootstrap.Modal(document.getElementById("approvalModal"));
+  console.log(modal);
   const dp_id_input = document.getElementById("id_detailpage");
   const suggested_answer = dp_artist_fullname.split(" ").slice(-1)[0];
   dp_id_input.value = dp_id;
 
   const dp_artist_fullname_input =
     document.getElementById("id_artist_fullname");
+  console.log(dp_artist_fullname);
+  console.log(dp_artist_fullname_input);
   dp_artist_fullname_input.value = dp_artist_fullname;
 
   const dp_title_input = document.getElementById("id_title");
+  console.log(dp_title_input);
+  console.log(dp_title);
   dp_title_input.value = dp_title;
 
   const dp_artist_answer = document.getElementById("id_artist_answer");
+  console.log(dp_artist_answer);
+  console.log(suggested_answer);
   dp_artist_answer.value = suggested_answer;
 
   const dp_image = document.getElementById("id_approval_image");
+  console.log(dp_image);
+  console.log(imageUrl);
   dp_image.setAttribute("src", imageUrl);
 
   modal.show();
