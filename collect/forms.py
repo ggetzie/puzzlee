@@ -19,10 +19,6 @@ class ApproveForm(forms.Form):
     detailpage = forms.ModelChoiceField(
         queryset=DetailPage.objects.all(), widget=forms.HiddenInput()
     )
-    artist_answer = forms.CharField(
-        max_length=150,
-        help_text="This will be the accepted answer for the puzzle. Usually the artist's last name.",
-    )
     title = forms.CharField(max_length=150)
     artist_fullname = forms.CharField(max_length=150, label="Artist Name")
 

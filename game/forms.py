@@ -1,17 +1,13 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Div
 from django import forms
+from django.utils.text import slugify
 
 from game.models import Artwork, Artist
 
 
 class CreateArtworkForm(forms.ModelForm):
     artist_fullname = forms.CharField(max_length=150, label="Artist Full Name")
-    artist_answer = forms.CharField(
-        max_length=150,
-        label="Artist Answer",
-        help_text="The portion of the artist's name to use as the answer to the puzzle",
-    )
 
     class Meta:
         model = Artwork
@@ -44,7 +40,7 @@ class CreateArtworkForm(forms.ModelForm):
     def save(self, *args, **kwargs):
         user = self.cleaned_data["added_by"]
         artist, _ = Artist.objects.get_or_create(
-            answer=self.cleaned_data["artist_answer"],
+            name_slug=slugify(self.cleaned_data["artist_fullname"]),
             defaults={
                 "fullname": self.cleaned_data["artist_fullname"],
                 "added_by": user,
@@ -59,14 +55,13 @@ class CreateArtworkForm(forms.ModelForm):
             added_by=user,
         )
         artwork.save()
-        print(artwork)
         return artwork
 
 
 class CreateArtistForm(forms.ModelForm):
     class Meta:
         model = Artist
-        fields = ("fullname", "answer")
+        fields = ("fullname",)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -75,3 +70,12 @@ class CreateArtistForm(forms.ModelForm):
         self.helper.form_action = "game:artist_create"
         self.helper.form_class = "pz-form"
         self.helper.add_input(Submit("submit", "Submit"))
+
+    def save(self, *args, **kwargs):
+        user = self.cleaned_data["added_by"]
+        artist = Artist(
+            fullname=self.cleaned_data["fullname"],
+            added_by=user,
+        )
+        artist.save()
+        return artist

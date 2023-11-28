@@ -94,8 +94,7 @@ class ArtworkImage(models.Model):
 
 class Artist(models.Model):
     fullname = models.CharField("Full Name", max_length=150)
-    answer = models.CharField("Answer", max_length=150)
-    answer_slug = models.SlugField("Answer Slug", max_length=150)
+    name_slug = models.SlugField("Name Slug", max_length=150, default="")
     added_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     created_at = models.DateTimeField("Created at", default=timezone.now)
 
@@ -109,8 +108,5 @@ class Artist(models.Model):
         return f"{self.fullname}"
 
     def save(self, *args, **kwargs):
-        self.answer_slug = slugify(self.answer)
+        self.name_slug = slugify(self.fullname)
         return super().save(*args, **kwargs)
-
-    def check_guess(self, guess):
-        return slugify(guess) == self.answer_slug
