@@ -213,7 +213,7 @@ function showEnlarged(title, origUrl) {
 
 function showApprovalForm(dp_id, dp_title, dp_artist_fullname, imageUrl) {
   const modal = new bootstrap.Modal(document.getElementById("approvalModal"));
-  console.log(modal);
+  // console.log(modal);
   const dp_id_input = document.getElementById("id_detailpage");
   const suggested_answer = dp_artist_fullname.split(" ").slice(-1)[0];
   dp_id_input.value = dp_id;
