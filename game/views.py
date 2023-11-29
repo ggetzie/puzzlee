@@ -49,3 +49,8 @@ class ArtistList(UserIsStaffMixin, ListView):
 
 class ArtistDetail(UserIsStaffMixin, DetailView):
     model = Artist
+
+
+def home(request):
+    selected = Artwork.objects.order_by("?").first()
+    return render(request, "game/home.html", context={"artwork": selected})

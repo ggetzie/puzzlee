@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1 class="display-1 text-center">Puzzlee</h1>
+<div class="w-100 d-flex flex-column align-items-center mb-3">
+  <img src="{{ artwork.artworkimage.get768 }}" class="img-fluid rounded m-auto" />
+  <h2 class="display-4 text-center">{{ artwork.title }}</h2>
+  <p class="text-center">{{ artwork.artist.fullname }}</p>
+</div>
+
+{% endblock content %}
