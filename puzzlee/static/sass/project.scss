@@ -4,7 +4,7 @@
 // project specific CSS goes here
 
 ////////////////////////////////
-		//Variables//
+//Variables//
 ////////////////////////////////
 
 // Alert colors
@@ -17,7 +17,7 @@ $dark-pink: #eed3d7;
 $red: #b94a48;
 
 ////////////////////////////////
-		//Alerts//
+//Alerts//
 ////////////////////////////////
 
 // bootstrap alert CSS, translated to the django-standard levels of
@@ -95,21 +95,25 @@ a {
   right: 0;
   margin-bottom: 10%;
 }
+
 .autocomplete-items div {
   padding: 10px;
   cursor: pointer;
   background-color: #fff;
   border-bottom: 1px solid #d4d4d4;
 }
+
 .autocomplete-items div:hover {
   /*when hovering an item:*/
   background-color: #e9e9e9;
 }
+
 .autocomplete-active {
   /*when navigating through the items using the arrow keys:*/
   background-color: DodgerBlue !important;
   color: #ffffff;
 }
+
 /* End autocomplete */
 
 .is_candidate {
@@ -148,4 +152,54 @@ img#enlargedImage {
 
 img#id_approval_image {
   max-width: 800px;
+}
+
+#painting-container {
+  position: relative;
+}
+
+#painting {
+  width: 100%;
+  height: 100%;
+}
+
+#grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+}
+
+.grid-portrait {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+}
+
+.grid-landscape {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.grid-square {
+  background-color: rgba(55, 55, 55, 1);
+  border: rgba(255, 255, 255, 1) 1px solid;
+  cursor: pointer;
+}
+
+.grid-square:hover {
+  background-color: rgba(155, 155, 155, 1);
+}
+
+.failed-guess {
+  text-decoration: line-through;
+}
+
+#guess-list {
+  max-width: fit-content;
+}
+
+#messages {
+  max-width: fit-content;
 }

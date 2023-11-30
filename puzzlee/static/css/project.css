@@ -12663,3 +12663,57 @@ img#enlargedImage {
 img#id_approval_image {
   max-width: 800px;
 }
+
+#painting-container {
+  position: relative;
+}
+
+#painting {
+  width: 100%;
+  height: 100%;
+}
+
+#grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+}
+
+.grid-portrait {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+}
+
+.grid-landscape {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.grid-square {
+  background-color: rgb(55, 55, 55);
+  border: rgb(255, 255, 255) 1px solid;
+  cursor: pointer;
+}
+
+.grid-square:hover {
+  background-color: rgb(155, 155, 155);
+}
+
+.failed-guess {
+  text-decoration: line-through;
+}
+
+#guess-list {
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
+
+#messages {
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}

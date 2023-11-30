@@ -52,5 +52,20 @@ class ArtistDetail(UserIsStaffMixin, DetailView):
 
 
 def home(request):
-    selected = Artwork.objects.order_by("?").first()
-    return render(request, "game/home.html", context={"artwork": selected})
+    selected = Artwork.objects.filter(artworkimage__isnull=False).order_by("?").first()
+    grid_class = (
+        "grid-portrait"
+        if selected.artworkimage.image.height > selected.artworkimage.image.width
+        else "grid-landscape"
+    )
+    all_artists = {a.fullname: a.id for a in Artist.objects.all()}
+    return render(
+        request,
+        "game/home.html",
+        context={
+            "artwork": selected,
+            "grid_class": grid_class,
+            "all_artists": all_artists,
+            "answer": selected.artist.id,
+        },
+    )
