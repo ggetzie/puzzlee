@@ -1,23 +1,27 @@
 var squaresRemaining = 12;
 var gameOver = false;
 var canReveal = true;
-const allArtists = JSON.parse(document.getElementById("all-artists").textContent);
+const allArtists = JSON.parse(
+  document.getElementById("all-artists").textContent
+);
 const answer = parseInt(document.getElementById("answer").textContent);
+const artworkTitle = document.getElementById("artwork-title").textContent;
 const clickASquare = "Click a square to reveal a portion of the artwork";
-const enterAGuess = "Start typing the name of an artist and click Guess to make a guess";
+const enterAGuess =
+  "Start typing the name of an artist and click Guess to make a guess";
 
 function setupGrid() {
   const grid = document.getElementById("grid");
   let messages = document.getElementById("messages");
   messages.textContent = clickASquare;
-  for (let i=0; i < 12; i++) {
+  for (let i = 0; i < 12; i++) {
     let square = document.createElement("div");
     square.classList.add("grid-square");
-    square.onclick = function() { 
+    square.onclick = function () {
       if (!canReveal) {
         return;
       }
-      this.style.visibility = "hidden"
+      this.style.visibility = "hidden";
       canReveal = false;
       let guessInput = document.getElementById("guess-input");
       guessInput.disabled = false;
@@ -50,31 +54,27 @@ function getAnswerName() {
 
 function endGame() {
   let painting = document.getElementById("painting");
-  painting.style.display = 'block';
-  painting.style.visibility = 'visible';
+  painting.style.display = "block";
+  painting.style.visibility = "visible";
   let grid = document.getElementById("grid");
-  grid.style.display = 'none';
+  grid.style.display = "none";
   gameOver = true;
   document.getElementById("guess-input").value = "";
   document.getElementById("guess-input").disabled = true;
   document.getElementById("guess-button").disabled = true;
-  
-
 }
 
 function win() {
   endGame();
   messages = document.getElementById("messages");
-  messages.textContent = "You won!";
+  messages.textContent = `You won! It's ${artworkTitle} by ${getAnswerName()}`;
 }
 
 function lose() {
   endGame();
   messages = document.getElementById("messages");
-  messages.textContent = "You lost! The answer was " + getAnswerName() + ".";
+  messages.textContent = `You lost! It's ${artworkTitle} by ${getAnswerName()}`;
 }
-
-
 
 function checkGuess() {
   if (gameOver) {
@@ -86,8 +86,8 @@ function checkGuess() {
   console.log(allArtists);
 
   let guess_id = allArtists[guess];
-  console.log("guess_id: %d", guess_id)
-  console.log("answer: %d", answer)
+  console.log("guess_id: %d", guess_id);
+  console.log("answer: %d", answer);
   if (guess_id == answer) {
     console.log("winner");
     win();
@@ -98,25 +98,23 @@ function checkGuess() {
     document.getElementById("guess-input").disabled = true;
     document.getElementById("guess-button").disabled = true;
     if (squaresRemaining == 0) {
-        lose();
+      lose();
     } else {
       let messages = document.getElementById("messages");
       messages.textContent = clickASquare;
     }
-    document.getElementById("guess-header").textContent = "Guesses Remaining: " + squaresRemaining;
+    document.getElementById("guess-header").textContent =
+      "Guesses Remaining: " + squaresRemaining;
   }
 }
 
-
-window.onload = function() {
+window.onload = function () {
   let painting = document.getElementById("painting");
   if (painting) {
-    painting.style.display = 'none';
+    painting.style.display = "none";
     setupGrid();
-    setTimeout(function() {
-        painting.style.display = 'block';
-    }
-    , 1000);
+    setTimeout(function () {
+      painting.style.display = "block";
+    }, 1000);
   }
-    
-}
+};

@@ -67,5 +67,6 @@ def home(request):
             "grid_class": grid_class,
             "all_artists": all_artists,
             "answer": selected.artist.id,
+            "artwork_title": selected.title,
         },
     )
