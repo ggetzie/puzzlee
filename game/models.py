@@ -62,6 +62,10 @@ class ArtworkImage(models.Model):
     )
     source = models.URLField()
     image = models.ImageField(upload_to=get_image_path)
+    phash = models.CharField(max_length=16, default="")
+    average_hash = models.CharField(max_length=16, default="")
+    dhash = models.CharField(max_length=16, default="")
+    whash = models.CharField(max_length=16, default="")
 
     def __str__(self):
         if self.artwork:
