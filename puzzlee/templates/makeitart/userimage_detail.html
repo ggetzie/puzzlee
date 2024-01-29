@@ -8,11 +8,43 @@
 <div class="center-narrow">
   <img src="{{ object.image.url }}" class="img-fluid m-auto" />
   <p>Uploaded by {{ object.user }}</p>
-  <ul>
-    <li>Perceuptual Hash: {{ object.phash}}</li>
-    <li>Average Hash: {{ object.average_hash}}</li>
-    <li>Difference Hash: {{ object.dhash}}</li>
-    <li>Wavelet Hash: {{ object.whash}}</li>
-  </ul>
+  <div class="row">
+    <div class="col">
+      {% with closest_phash.4 as ai %}
+      <h2>Closest Match by Perceptual Hash</h2>
+      <img src="{{ ai.image.url }}" class="img-fluid m-auto" />
+      <p>Difference: {{ closest_phash.0 }}</p>
+      <p>{{ ai.detailpage.title }} by {{ ai.detailpage.artist_name }}</p>
+      {% endwith %}
+    </div>
+    <div class="col">
+      {% with closest_average_hash.4 as ai %}
+      <h2>Closest Match by Average Hash</h2>
+      <img src="{{ ai.image.url }}" class="img-fluid m-auto" />
+      <p>Difference: {{ closest_average_hash.1 }}</p>
+      <p>{{ ai.detailpage.title }} by {{ ai.detailpage.artist_name }}</p>
+      {% endwith %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      {% with closest_dhash.4 as ai %}
+      <h2>Closest Match by Difference Hash</h2>
+      <img src="{{ ai.image.url }}" class="img-fluid m-auto" />
+      <p>Difference: {{ closest_dhash.2 }}</p>
+      <p>{{ ai.detailpage.title }} by {{ ai.detailpage.artist_name }}</p>
+      {% endwith %}
+    </div>
+    <div class="col">
+      {% with closest_whash.4 as ai %}
+      <h2>Closest Match by Wavelet Hash</h2>
+      <img src="{{ ai.image.url }}" class="img-fluid m-auto" />
+      <p>Difference: {{ closest_whash.3 }}</p>
+      <p>{{ ai.detailpage.title }} by {{ ai.detailpage.artist_name }}</p>
+      {% endwith %}
+    </div>
+  </div>
+  
+
 </div>
 {% endblock content %}
