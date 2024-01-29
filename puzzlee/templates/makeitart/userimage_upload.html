@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Upload an Image
+{% endblock title %}
+
+{% block content %}
+<div class="center-narrow">
+  <h1>Upload an image</h1>
+  <p class="text-muted">* indicates field is required</p>
+  {% crispy form %}
+</div>
+{% endblock content%}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ object.title }}
+{% endblock title %}
+
+{% block content %}
+<div class="center-narrow">
+  <img src="{{ object.image.url }}" class="img-fluid m-auto" />
+  <p>Uploaded by {{ object.user }}</p>
+  <ul>
+    <li>Perceuptual Hash: {{ object.phash}}</li>
+    <li>Average Hash: {{ object.average_hash}}</li>
+    <li>Difference Hash: {{ object.dhash}}</li>
+    <li>Wavelet Hash: {{ object.whash}}</li>
+  </ul>
+</div>
+{% endblock content %}

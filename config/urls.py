@@ -14,6 +14,7 @@ urlpatterns = [
     ),
     path("game/", include("game.urls", namespace="game")),
     path("collect/", include("collect.urls", namespace="collect")),
+    path("mia/", include("makeitart.urls", namespace="makeitart")),
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management

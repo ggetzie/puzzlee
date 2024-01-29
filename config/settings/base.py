@@ -77,7 +77,7 @@ THIRD_PARTY_APPS = [
     "django_extensions",
 ]
 
-LOCAL_APPS = ["puzzlee.users", "core", "game", "collect"]
+LOCAL_APPS = ["puzzlee.users", "core", "game", "collect", "makeitart"]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 

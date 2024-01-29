@@ -23,5 +23,12 @@
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "python.formatting.provider": "none",
-  "cSpell.words": ["dhash", "phash", "whash"]
+  "cSpell.words": [
+    "dhash",
+    "imagehash",
+    "makeitart",
+    "phash",
+    "userimage",
+    "whash"
+  ]
 }
