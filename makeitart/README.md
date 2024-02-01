@@ -8,9 +8,11 @@ A better idea is probably to use something like [Image2Vec](https://github.com/c
 
 [Extract a feature vector for any image with pytorch](https://becominghuman.ai/extract-a-feature-vector-for-any-image-with-pytorch-9717561d1d4c)
 
+More recent method maybe? [Generating image embeddings on a GPU with LLaVA and llama-cpp-python](https://mildbyte.xyz/blog/llama-cpp-python-llava-gpu-embeddings/)
+
 Next steps:
 1. Install and configure (pg_vector)[https://github.com/pgvector/pgvector] and add a vector column for ArtworkImage and UserImage.
 2. Extract feature vectors for all artwork images
 3. modify UserImage upload to extract a feature vector when saving.
-   1. Does this take a long time? Should it be done async with celery?
+   1. Does this take a long time? Should it be done async with celery? (probably)
 4. On the UserImage detail page, show the most similar artworks.
